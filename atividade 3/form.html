@@ -1,0 +1,102 @@
+<html>
+
+<head>
+    <style>
+        .submit-button{
+            float: right;
+            margin-right: 2em;
+        }
+
+        .container {
+            margin: 5% 20% 10% 20%;
+            width: 60%;
+        }
+    </style>
+    <title>Formulário IFSP</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Matrícula Aluno</h1>
+        <form>
+
+            <fieldset>
+                <legend>Dados Pessoais</legend>
+
+                <label for="nome">Nome: </label>
+                <input type="email" name="email" id="email"><br><br>
+
+                <label for="cpf">CPF: </label>
+                <input type="text" name="cpf" id="cpf" placeholder="XXX.XXX.XXX-XX" title="XXX.XXX.XXX-XX"
+                    pattern="(\d{3}.\d{3}.\d{3}-\d{2}|(\d{11}))" /><br><br>
+
+                <label for="dataNascimento">Data Nascimento: </label>
+                <input type="date" name="dataNascimento" id="dataNascimento"><br><br>
+
+                <label for="sexo">Sexo: </label>
+                <input type="radio" name="sexo" id="sexo">Masculino</input>
+                <input type="radio" name="sexo" id="sexo">Feminino</input><br><br>
+
+                <label for="cidade">Cidade: </label>
+                <input type="text" name="cidade" id="cidade">
+                <select>
+                    <option value="Acre">AC</option>
+                    <option value="Alagoas">AL</option>
+                    <option value="Amapá">AP</option>
+                    <option value="Amazonas">AM</option>
+                    <option value="Bahia">BA</option>
+                    <option value="Ceará">CE</option>
+                    <option value="Distrito Federal">DF</option>
+                    <option value="Espírito Santo">ES</option>
+                    <option value="Goiás">GO</option>
+                    <option value="Maranhão">MA</option>
+                    <option value="Mato Grosso">MT</option>
+                    <option value="Mato Grosso do Sul">MS</option>
+                    <option value="Minas Gerais">MG</option>
+                    <option value="Pará">PA</option>
+                    <option value="Paraíba">PB</option>
+                    <option value="Paraná">PR</option>
+                    <option value="Pernambuco">PE</option>
+                    <option value="Piauí">PI</option>
+                    <option value="Rio de Janeiro">RJ</option>
+                    <option value="Rio Grande do Norte">RN</option>
+                    <option value="Rio Grande do Sul">RS</option>
+                    <option value="Rondônia">RO</option>
+                    <option value="Roraima">RR</option>
+                    <option value="Santa Catarina">SC</option>
+                    <option value="São Paulo">SP</option>
+                    <option value="Sergipe">SE</option>
+                    <option value="Tocantins">TO</option>
+                </select>
+
+            </fieldset>
+            <fieldset>
+                <legend>Dados da Matrícula</legend>
+                <label for="curso">Curso:</label><br>
+                <input type="radio" name="curso" value="ads">Análise e Desenvolvimento de Sistemas</input>
+                <input type="radio" name="curso" value="mec">Engenharia Mecânica</input>
+                <input type="radio" name="curso" value="sis">Tecnologia para Sistemas Web</input>
+
+                <br><br>
+
+                <label for="optativas">Disciplina(s) Optativas:</label><br>
+                <input type="checkbox" name="optatvias" value="robos">Programação de Robos</input>
+                <input type="checkbox" name="optatvias" value="ia">Desenvolvimento de Inteligências
+                Artificiais</input><br>
+                <input type="checkbox" name="optatvias" value="mc">Modelagem Computacional</input>
+                <input type="checkbox" name="optatvias" value="docker">Ambientes isolados: Desenvolvimento com
+                Docker</input>
+
+                <br><br>
+
+                <label for="sugestao">Sugestão de disciplinas futuras:</label><br>
+                <textarea id="sugestao" rows="10" cols="100"></textarea><br><br>
+            </fieldset><br>
+
+            <button class="submit-button" type="submit" name="enviar" value="enviar">Enviar</button>
+
+        </form>
+    </div>
+</body>
+
+</html>
