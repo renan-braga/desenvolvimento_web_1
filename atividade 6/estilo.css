@@ -1,0 +1,21 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 2em;
+    padding: 2em;
+    border: solid;
+    background-color: #fbfbfb; /* cor 1 */
+    color: rgb(80, 9, 71) /* cor 2 */
+}
+
+header {
+    background-color: #dabaf2;  /* cor 3 */
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+nav li {
+    font-size: 20px;
+}
+
