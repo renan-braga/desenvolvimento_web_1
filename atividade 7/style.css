@@ -1,0 +1,46 @@
+:root {
+    --azul-piscina: #00fffe;
+    --azul-claro: #00a6ff;
+    --azul-medio: #004dff;
+    --azul-escuro: #0d00ff;
+    --roxo: #6a00ff; 
+}
+
+body {
+    background-color: var(--azul-claro);
+}
+
+section {
+    width: 80%;
+    padding: 2em;
+    margin: 2em;
+    border: 5px solid;
+    border-radius: 2%;
+}
+
+section.titulo {
+    border-color: var(--roxo);
+}
+
+section.informacoes-pessoais {
+    padding: 2em;
+    margin: 2em;
+    height: 30%;
+    border-color: var(--azul-piscina);
+}
+
+section.personalidade {
+    display: flex;
+    flex-direction: row;
+    border-color: var(--azul-medio);
+}
+
+section.personalidade > .coluna {
+    width: 100%;
+    padding: 1em;
+    border-color:  var(--roxo);
+}
+
+section.qualificacao {
+    border-color:  var(--azul-escuro);
+}
