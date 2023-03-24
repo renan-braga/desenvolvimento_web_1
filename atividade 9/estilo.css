@@ -1,0 +1,29 @@
+:root {
+    font-family: Arial, sans-serif;
+    font-size: 2rem;
+
+}
+
+body {
+    margin: 2em;
+    padding: 2em;
+    border: solid;
+    background-color: #fbfbfb; /* cor 1 */
+    color: rgb(80, 9, 71) /* cor 2 */
+}
+
+header {
+    background-color: #71239F;  /* cor 3 */
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+button {
+    font-size: 1rem;
+}
+
+a {
+    color: white;
+}

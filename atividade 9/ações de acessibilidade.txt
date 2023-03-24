@@ -1,0 +1,20 @@
+ações de acessibilidade
+
+1) deixar o texto relativo/escalável com rem
+2) usar semântica correta
+3) adicionar alt às imagens
+4) cores contrastantes
+
+    - testei as cores nesse site
+        https://dequeuniversity.com/rules/axe/3.1/color-contrast
+        constatei que o fundo com a cor de fonte #dabaf2 falhou no teste de contraste, então substitui pela cor de fonte #71239F
+        
+    - removi a fonte de 20px do header para 2rem, deixando o tamanho da fonte ajustável para outros dispositivos
+
+    - alterei a cor do item clickado no header
+    - adicionei alt nas imagens que não tinham
+    - adicionei um title nos iframes que não tinham
+    - aumentei o tamanho dos botões para serem também relativos
+    - garanti que todos os elementos de interação da página, como links, botões, vídeos e áudios sejam utilizáveis por teclado
+        - adicionei "tabindex" para as seções principais do texto
+    - adicionei um h1 avisando o usuári em que parte da p[agina ele se encontra]
