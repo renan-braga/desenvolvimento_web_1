@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+
+        .dot {
+            fill: white;
+        }
+
+        .pacman {
+            fill: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="jogo" width="300" height="300"></canvas>
+    <script>
+        const canvas = document.getElementById('jogo');
+        const ctx = canvas.getContext('2d');
+        const tamanhoGrade = 30;
+        const tamanhoPac = tamanhoGrade * 0.8;
+        const velocidadePac = 2;
+        const raioPonto = 2;
+
+        let pacX = tamanhoGrade / 2 + 1;
+        let pacY = tamanhoGrade / 2 + 1;
+        let pacVx = 0;
+        let pacVy = 0;
+
+        const labirinto = gerarLabirinto(30, 30);
+
+        // Gera labirinto aleatório
+        function gerarLabirinto(linhas, colunas) {
+            const labirinto = new Array(linhas).fill(null).map(() => new Array(colunas).fill(false));
+            for (let i = 0; i < linhas; i++) {
+                for (let j = 0; j < colunas; j++) {
+                    labirinto[i][j] = Math.random() < 0.3;
+                }
+            }
+            return labirinto;
+        }
+
+        // Desenha parede
+        function desenharParede(x, y) {
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(x * tamanhoGrade, y * tamanhoGrade, tamanhoGrade, tamanhoGrade);
+        }
+
+        // Desenha Pac-Man
+        function desenharPacMan() {
+            ctx.beginPath();
+            ctx.arc(pacX, pacY, tamanhoPac / 2, 0.2 * Math.PI, 1.8 * Math.PI);
+            ctx.lineTo(pacX, pacY);
+            ctx.closePath();
+            ctx.fillStyle = 'yellow';
+            ctx.fill();
+        }
+
+        // Desenha ponto
+        function desenharPonto(x, y) {
+            ctx.beginPath();
+            ctx.arc(x * tamanhoGrade + tamanhoGrade / 2, y * tamanhoGrade + tamanhoGrade / 2, raioPonto, 0, 2 * Math.PI);
+            ctx.fillStyle = 'purple';
+            ctx.fill();
+        }
+
+        // Desenha tabuleiro
+        function desenharTabuleiro() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < labirinto.length; i++) {
+                for (let j = 0; j < labirinto[i].length; j++) {
+                    if (labirinto[i][j]) {
+                        desenharParede(i, j);
+                    } else {
+                        desenharPonto(i, j);
+                    }
+                }
+            }
+            desenharPacMan();
+        }
+
+        // Atualiza posição do Pac-Man
+        function atualizarPacMan() {
+            const novoX = pacX + pacVx;
+            const novoY = pacY + pacVy;
+
+            let gridX = Math.floor(novoX / tamanhoGrade);
+            let gridY = Math.floor(novoY / tamanhoGrade);
+
+            if (!labirinto[gridX][gridY]) {
+                pacX = novoX;
+                pacY = novoY;
+            }
+
+            if (pacX - tamanhoPac / 3 <= 0) pararPacman();
+            if (pacX + tamanhoPac / 3 >= canvas.width) pararPacman();
+            if (pacY - tamanhoPac / 3 <= 0) pararPacman();
+            if (pacY + tamanhoPac / 3 >= canvas.height) pararPacman();
+        }
+
+        function pararPacman() {
+            pacVx = 0;
+            pacVy = 0;            
+        }
+
+        // Loop principal do jogo
+        function loopJogo() {
+            atualizarPacMan();
+            desenharTabuleiro();
+            requestAnimationFrame(loopJogo);
+        }
+
+        loopJogo();
+
+        // Adiciona controle de teclado para mover o Pac-Man
+        document.addEventListener('keydown', (e) => {
+            pararPacman() 
+            if (e.key === 'ArrowUp') {
+                pacVy = -velocidadePac;
+            } else if (e.key === 'ArrowDown') {
+                pacVy = velocidadePac;
+            } else if (e.key === 'ArrowLeft') {
+                pacVx = -velocidadePac;
+            } else if (e.key === 'ArrowRight') {
+                pacVx = velocidadePac;
+            }
+        });
+    </script>
+</body>
+
+</html>
