@@ -1,0 +1,16 @@
+<html>
+
+    <label>Escreva seus caracteres: </label><br><br>
+    <input type="text" id="l1" col="10"><br><br><br>
+    <label>Resultado inverso</label><br><br>
+    <input type="text" id="l2" col="10"><br>
+
+    <script>
+        linha1 = document.getElementById("l1")
+        linha1.addEventListener("keyup", function(event) {
+            textoInvertido = linha1.value.split('').reverse().join('')
+            document.getElementById("l2").value = textoInvertido
+        });
+    </script>
+    
+</html>

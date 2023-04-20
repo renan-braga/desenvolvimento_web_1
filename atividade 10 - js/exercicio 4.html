@@ -1,0 +1,23 @@
+<html>
+    <label>Insira sua idade: </label><br><br>
+    <input type="text" id="idade" col="5"><br><br>
+
+    <input type="button" id="calcular" value="Calcular">
+
+    <script>
+        function calcularIdade(idade) {
+            let msg
+            if(idade >= 18) msg = "Parabéns, já pode dirigir"
+            else msg = "Espere mais " + (18 - idade) + " ano(s) para poder dirigir"
+            alert(msg)
+        }
+
+        btnCalcular = document.getElementById("calcular")
+        btnCalcular.addEventListener("click", function(){
+            idade = Number(document.getElementById("idade").value)
+            calcularIdade(idade)
+            document.getElementById.value = ""
+        })
+    </script>
+
+</html>

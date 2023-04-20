@@ -1,0 +1,40 @@
+<html>
+
+    <label>Numero A: </label> <input type="text" id="a" col="10"><br><br>
+    <label>Numero B: </label> <input type="text" id="b" col="10"><br><br>
+    <label>Numero C: </label> <input type="text" id="c" col="10"><br><br><br>
+
+    <input type="button" id="calcular" value="Calcular">
+
+    <div id="resultado">
+
+    </div>
+
+    <script>
+        function calcular(a, b, c) {
+            const formula = document.createElement("p")
+            const linha1 = document.createElement("p")
+            const linha2 = document.createElement("p")
+            const resultado = document.createElement("p")
+            formula.textContent = "Δ = b² – 4ac"
+            linha1.textContent = "Δ = "+ b +"² – 4 * " + a + " *  " + c
+            linha2.textContent = "Δ = " + b**2 + " – " + 4*a*c 
+            resultado.textContent = "Δ = " + Number((b**2) - (4*a*c))
+
+            document.getElementById("resultado").appendChild(formula)
+            document.getElementById("resultado").appendChild(linha1)
+            document.getElementById("resultado").appendChild(linha2)
+            document.getElementById("resultado").appendChild(resultado)
+        }
+
+        btnCalcular = document.getElementById("calcular")
+        btnCalcular.addEventListener("click", function(){
+            a = document.getElementById("a")
+            b = document.getElementById("b")
+            c = document.getElementById("c")
+            calcular(Number(a.value), Number(b.value), Number(c.value))
+        })
+    </script>
+
+    
+</html>

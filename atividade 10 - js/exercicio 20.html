@@ -1,0 +1,30 @@
+<html>
+    <div id="sequencia-original">
+        <span>sequência original: </span>
+        <input type="text" col="10" id="seqChars">
+    </div>
+    <div id="sequencia-ordenada">
+        <span>sequência ordenada: </span>
+        <label id="seqCharsOrdenada">
+    </div>
+    <script>     
+        elemSeqOriginal = document.getElementById("seqChars")
+        elemSeqOrdenada = document.getElementById("seqCharsOrdenada")
+        spanSeqOriginal = document.createElement("span")
+        spanSeqOrdenada = document.createElement("span")
+
+        elemSeqOriginal.addEventListener("keyup", function(event) {
+            console.log("passei")
+            textSeqOriginal = elemSeqOriginal.value
+            size = textSeqOriginal.length
+            arraySeqOriginal = []
+            for(i = 0; i < size; i++){
+                console.log(textSeqOriginal.charAt(i))
+                arraySeqOriginal.push(textSeqOriginal.charAt(i))
+            }
+            spanSeqOrdenada.textContent = arraySeqOriginal.sort().reverse()
+            elemSeqOrdenada.appendChild(spanSeqOrdenada)
+        })
+
+    </script>
+</html>

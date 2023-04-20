@@ -1,0 +1,25 @@
+<html>
+    <span>O 1001o primo é: </span><span id="resultado"></span><br><br>
+
+
+    <script>
+        let primos = 0
+        let numero = 0
+        while(primos <= 1001){
+            if(ehPrimo(++numero))primos++
+        }
+
+        alert("ultimo primo é: " + numero)
+
+        function ehPrimo(numero){
+            let divisores = 0
+            for(let i = 1; i <= numero; i++){
+                if(numero % i == 0) divisores++
+            }
+            return divisores <= 2
+        }
+
+        document.getElementById("resultado").textContent = numero
+        </script>
+        
+</html>

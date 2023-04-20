@@ -1,0 +1,54 @@
+<html>
+    <div id="resultado">
+        <table></table>
+    </div>
+    <div id="somatoria">Resultado somatória: </div>
+    <script>
+
+        apresentaMatriz(geraMatriz(20, 20))
+
+        function apresentaMatriz(matriz) {
+            const resultado = document.getElementById("resultado")
+            const somatoria = document.getElementById("somatoria")
+            const tabela = resultado.getElementsByTagName("table")
+            const accSpan = document.createElement("span")
+            let acc = 0
+            matriz.forEach((linha, i) => {
+                tr = document.createElement("tr")
+                td = document.createElement("td")
+                td.textContent = "meu array[" + (i < 10 ? ("0" + i) : i) + "] = "              
+                linha.forEach((coluna, j) => {
+                    span = document.createElement("span")
+                    if(i == j) {
+                        span.style.color = "red"
+                        acc += Number(coluna)
+                    }
+                    span.textContent += coluna + " "
+                    td.appendChild(span)
+                })
+                tr.appendChild(td)
+                resultado.appendChild(tr)
+                accSpan.textContent = acc
+                somatoria.append(accSpan)
+            })
+        }
+
+        function geraMatriz(numLinhas, numColunas) {
+            let mArray = []
+            for(i = 0; i < numLinhas; i++){
+                mArray[i] = []
+                for(j = 0; j < numColunas; j++){
+                    mArray[i].push(numAleatorio(1,99))
+                }
+            }
+            return mArray
+        }
+
+        function numAleatorio(min, max){
+            let num =  Math.floor(Math.random() * max) + min
+            if(num < 10) num = "0" + num
+            return num
+        }
+
+    </script>
+</html>

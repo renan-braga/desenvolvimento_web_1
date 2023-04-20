@@ -1,0 +1,26 @@
+<html>
+    <span>Fibonacci é: </span><span id="resultado"></span><br><br>
+    <span>A soma dos pares é: </span><span id="somaPares"></span>
+
+    <script>
+        let resultado = []
+        let termoAnt = 0
+        let termoPos = 1
+        resultado.push(termoAnt, termoPos)
+        while(termoPos + termoAnt <= 50000){
+            let aux = termoPos
+            termoPos = termoPos + termoAnt
+            termoAnt = aux
+            resultado.push(termoPos)
+        }
+
+        let somaPares = 0
+        resultado.forEach(element => {
+            if(element % 2 == 0) somaPares += element
+        });
+
+        document.getElementById("resultado").textContent = resultado
+        document.getElementById("somaPares").textContent = somaPares
+        </script>
+        
+</html>

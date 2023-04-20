@@ -1,0 +1,45 @@
+<html>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+    <table>
+        <thead><tr><th>Primos</th></tr></thead>
+        <tbody id="resultado">
+            
+        </tbody>
+    </table>
+
+
+    <script>
+        let numero = 0
+        let resultados = []
+        while(numero < 200){
+            if(ehPrimo(++numero)) resultados.push(numero)
+        }
+
+        alert("primos: " + resultados)
+
+        function ehPrimo(numero){
+            let divisores = 0
+            for(let i = 1; i <= numero; i++){
+                if(numero % i == 0) divisores++
+            }
+            return divisores <= 2
+        }
+
+        function montarTabela(resultados){
+            let linhas = ""
+            resultados.forEach(element => {
+                linhas += "<tr><td>" + element + "</tr></td>"
+            });
+            return linhas;
+        }
+
+        tabela = montarTabela(resultados)
+        alert(tabela)
+        document.getElementById("resultado").innerHTML = tabela
+        </script>
+        
+</html>

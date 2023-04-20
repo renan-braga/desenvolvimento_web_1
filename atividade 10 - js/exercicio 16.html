@@ -1,0 +1,22 @@
+<html>
+    <p>O resultado da operação </p><span id="l1"></span>
+    <div id="resultado"></div>
+    <script>
+        a = 2
+        n = 8
+
+        potencia(a, n)
+
+        function potencia(a, n) {
+            b = 1
+            for(count = 0; count <= n; count++){
+                b = Math.pow(a, count)
+                linha = "<br>" + a + "<sup>" + count + "</sup> = " + b
+                document.getElementById("resultado").innerHTML = document.getElementById("resultado").innerHTML + linha
+            }
+            return b            
+        }
+
+        document.getElementById("l1").textContent = a + "^" + n + " = " + b
+    </script>
+</html>

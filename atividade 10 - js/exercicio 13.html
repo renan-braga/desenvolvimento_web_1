@@ -1,0 +1,20 @@
+<html>
+    <p>O resultado da operação </p><span id="l1"></span>
+
+    <script>
+        a = numAleatorio(1, 10)
+        n = numAleatorio(1, 10)
+        b = 1
+        count = 1
+        while(count <= n){
+            b*=a
+            count++
+        }
+
+        document.getElementById("l1").textContent = a + "^" + n + " = " + b
+
+        function numAleatorio(min, max){
+            return Math.floor(Math.random() * max) + min
+        }
+    </script>
+</html>

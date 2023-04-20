@@ -1,0 +1,12 @@
+<html>
+    <span>A soma dos múltiplos de 3 e 5 abaixo de 1000 é: </span><span id="resultado"></span>
+
+    <script>
+        let resultado = 0
+        for(let i = 1; i <= 1000; i++){
+            if(i % 3 == 0 || i % 5 == 0) resultado += i
+        }
+
+        document.getElementById("resultado").textContent = resultado
+        </script>
+</html>
