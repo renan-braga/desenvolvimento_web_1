@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    <canvas id="jogo" width="300" height="300"></canvas>
+    <canvas id="jogo" width="800" height="600"></canvas>
     <script>
         const canvas = document.getElementById('jogo');
         const ctx = canvas.getContext('2d');
@@ -26,13 +26,19 @@
         const tamanhoPac = tamanhoGrade * 0.8;
         const velocidadePac = 2;
         const raioPonto = 2;
+        let score = 0;
+        let pontos = []
+        
 
         let pacX = tamanhoGrade / 2 + 1;
         let pacY = tamanhoGrade / 2 + 1;
         let pacVx = 0;
         let pacVy = 0;
 
-        const labirinto = gerarLabirinto(30, 30);
+        const labirinto = gerarLabirinto(50, 50);
+
+        const canvasMaxWidth = 800;
+        const canvasMaxHeight = 600;
 
         // Gera labirinto aleatório
         function gerarLabirinto(linhas, colunas) {
@@ -51,22 +57,43 @@
             ctx.fillRect(x * tamanhoGrade, y * tamanhoGrade, tamanhoGrade, tamanhoGrade);
         }
 
-        // Desenha Pac-Man
         function desenharPacMan() {
             ctx.beginPath();
-            ctx.arc(pacX, pacY, tamanhoPac / 2, 0.2 * Math.PI, 1.8 * Math.PI);
+            const raio = tamanhoPac / 2;
+            const anguloInicial = pacVx === 0 && pacVy === -velocidadePac ? 0.65 : Math.atan2(pacVy, pacVx) + 0.1;
+            const anguloFinal = pacVx === 0 && pacVy === -velocidadePac ? 2.35 : Math.atan2(pacVy, pacVx) - 0.1;
+            ctx.arc(pacX, pacY, raio, anguloInicial * Math.PI, anguloFinal * Math.PI);
             ctx.lineTo(pacX, pacY);
             ctx.closePath();
             ctx.fillStyle = 'yellow';
             ctx.fill();
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 2;
+            ctx.stroke();
         }
 
         // Desenha ponto
         function desenharPonto(x, y) {
             ctx.beginPath();
             ctx.arc(x * tamanhoGrade + tamanhoGrade / 2, y * tamanhoGrade + tamanhoGrade / 2, raioPonto, 0, 2 * Math.PI);
-            ctx.fillStyle = 'purple';
+            ctx.fillStyle = 'yellow';
             ctx.fill();
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+        }
+
+        // Função para atualizar o tamanho do canvas
+        function atualizarTamanhoCanvas() {
+            const larguraJanela = window.innerWidth;
+            const alturaJanela = window.innerHeight;
+
+            const tamanhoCanvas = Math.min(larguraJanela * 0.9, alturaJanela * 0.9);
+            const canvasWidth = Math.min(tamanhoCanvas, canvasMaxWidth);
+            const canvasHeight = Math.min(tamanhoCanvas, canvasMaxHeight);
+
+            canvas.width = canvasWidth;
+            canvas.height = canvasHeight;
         }
 
         // Desenha tabuleiro
@@ -82,36 +109,67 @@
                 }
             }
             desenharPacMan();
-        }
-
-        // Atualiza posição do Pac-Man
-        function atualizarPacMan() {
-            const novoX = pacX + pacVx;
-            const novoY = pacY + pacVy;
-
-            let gridX = Math.floor(novoX / tamanhoGrade);
-            let gridY = Math.floor(novoY / tamanhoGrade);
-
-            if (!labirinto[gridX][gridY]) {
-                pacX = novoX;
-                pacY = novoY;
-            }
-
-            if (pacX - tamanhoPac / 3 <= 0) pararPacman();
-            if (pacX + tamanhoPac / 3 >= canvas.width) pararPacman();
-            if (pacY - tamanhoPac / 3 <= 0) pararPacman();
-            if (pacY + tamanhoPac / 3 >= canvas.height) pararPacman();
+            desenharPlacar();
         }
 
         function pararPacman() {
             pacVx = 0;
-            pacVy = 0;            
+            pacVy = 0;
         }
+        
+
+        function atualizarPacMan() {
+            const novoX = pacX + pacVx;
+            const novoY = pacY + pacVy;
+        
+            let gridX = Math.floor(novoX / tamanhoGrade);
+            let gridY = Math.floor(novoY / tamanhoGrade);
+        
+            if (!labirinto[gridX][gridY]) {
+                pacX = novoX;
+                pacY = novoY;
+            } else {
+                pararPacman();
+            }
+        
+            if (pacX - tamanhoPac / 3 <= 0) pararPacman();
+            if (pacX + tamanhoPac / 3 >= canvas.width) pararPacman();
+            if (pacY - tamanhoPac / 3 <= 0) pararPacman();
+            if (pacY + tamanhoPac / 3 >= canvas.height) pararPacman();
+        
+            // Checa colisão com os pontos
+            const dotX = gridX * tamanhoGrade + tamanhoGrade / 2;
+            const dotY = gridY * tamanhoGrade + tamanhoGrade / 2;
+            if (labirinto[gridY][gridX] && distancia(pacX, pacY, dotX, dotY) < tamanhoPac ) {
+                labirinto[gridX][gridY] = false;
+                score++;
+                //ctx.clearRect(gridX, gridY, tamanhoGrade, tamanhoGrade);
+                desenharPlacar();
+            }
+        }     
+    
+        
+        function distancia(x1, y1, x2, y2) {
+            return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+        }
+
+        function desenharPlacar() {
+            ctx.font = '30px Arial';
+            ctx.fillStyle = 'white';
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 4;
+            const x = canvas.width - 140;
+            const y = canvas.height - 30;
+            ctx.strokeText(`Score: ${score}`, x, y);
+            ctx.fillText(`Score: ${score}`, x, y);
+        }
+        
 
         // Loop principal do jogo
         function loopJogo() {
-            atualizarPacMan();
+            atualizarTamanhoCanvas();
             desenharTabuleiro();
+            atualizarPacMan();
             requestAnimationFrame(loopJogo);
         }
 
@@ -119,17 +177,21 @@
 
         // Adiciona controle de teclado para mover o Pac-Man
         document.addEventListener('keydown', (e) => {
-            pararPacman() 
             if (e.key === 'ArrowUp') {
                 pacVy = -velocidadePac;
+                pacVx = 0;
             } else if (e.key === 'ArrowDown') {
                 pacVy = velocidadePac;
+                pacVx = 0;
             } else if (e.key === 'ArrowLeft') {
                 pacVx = -velocidadePac;
+                pacVy = 0;
             } else if (e.key === 'ArrowRight') {
                 pacVx = velocidadePac;
+                pacVy = 0;
             }
         });
+        
     </script>
 </body>
 
